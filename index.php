@@ -129,10 +129,10 @@ if ($h > 30) { $h = 30; }
 [<input type="radio" name="frame" value="true" <?php if (!isset($frame) || $frame == 'true') { echo 'checked'; } ?> onclick="frameoff()"/> Yes
 <input type="radio" name="frame" value="false" <?php if ($frame == 'false') { echo 'checked'; } ?>/> No ]
 <label>Smily:</label>
-<input type="radio" name="smily" value="1" checked /><img src="pics/smily1.png" alt="normal" align="middle" onclick="document.forms[0].elements[9].checked=true" onmouseover="this.style.cursor='pointer'" />
-<input type="radio" name="smily" value="2" /><img src="pics/smily2.png" alt="ooh!" align="middle" onclick="document.forms[0].elements[10].checked=true" onmouseover="this.style.cursor='pointer'" />
-<input type="radio" name="smily" value="3" /><img src="pics/smily3.png" alt="ouch!" align="middle" onclick="document.forms[0].elements[11].checked=true" onmouseover="this.style.cursor='pointer'" />
-<input type="radio" name="smily" value="4" /><img src="pics/smily4.png" alt="yes!" align="middle" onclick="document.forms[0].elements[12].checked=true" onmouseover="this.style.cursor='pointer'" /><br />
+<input type="radio" name="smily" value="1" checked /><img src="images/smily1.png" alt="normal" align="middle" onclick="document.forms[0].elements[9].checked=true" onmouseover="this.style.cursor='pointer'" />
+<input type="radio" name="smily" value="2" /><img src="images/smily2.png" alt="ooh!" align="middle" onclick="document.forms[0].elements[10].checked=true" onmouseover="this.style.cursor='pointer'" />
+<input type="radio" name="smily" value="3" /><img src="images/smily3.png" alt="ouch!" align="middle" onclick="document.forms[0].elements[11].checked=true" onmouseover="this.style.cursor='pointer'" />
+<input type="radio" name="smily" value="4" /><img src="images/smily4.png" alt="yes!" align="middle" onclick="document.forms[0].elements[12].checked=true" onmouseover="this.style.cursor='pointer'" /><br />
 <label>Mines:</label>
 <input type="text" name="mines" size="2" maxlength="3" value="99" />
 <label>Time:</label>
@@ -247,77 +247,77 @@ $img_frame = imagecreate($img_width,$img_height);
 $bg2 = imagecolorallocate($img_frame,0,0,0);
 
 # title2.png - 104x43
-$img_f_title = imagecreatefrompng('pics/title2.png');
+$img_f_title = imagecreatefrompng('images/title2.png');
 imagecopy($img_frame,$img_f_title,0,0,0,0,104,43);
 
 # close.png - 72x43
-$img_f_close = imagecreatefrompng('pics/close2.png');
+$img_f_close = imagecreatefrompng('images/close2.png');
 imagecopy($img_frame,$img_f_close,$img_width-72,0,0,0,72,43);
 
 # titlebar2.png - 1x43
-$img_f_titlebar = imagecreatefrompng('pics/titlebar2.png');
+$img_f_titlebar = imagecreatefrompng('images/titlebar2.png');
 for($x=104; $x<$img_width-72; $x++) {
 imagecopy($img_frame,$img_f_titlebar,$x,0,0,0,1,43);
 }
 
 # minebox.png - 60x56
-$img_f_minebox = imagecreatefrompng('pics/minebox.png');
+$img_f_minebox = imagecreatefrompng('images/minebox.png');
 imagecopy($img_frame,$img_f_minebox,0,43,0,0,60,56);
 
 # timebox.png - 58x56
-$img_f_timebox = imagecreatefrompng('pics/timebox.png');
+$img_f_timebox = imagecreatefrompng('images/timebox.png');
 imagecopy($img_frame,$img_f_timebox,$img_width-58,43,0,0,58,56);
 
 # smilybar.png - 1x56
-$img_f_smilybar = imagecreatefrompng('pics/smilybar.png');
+$img_f_smilybar = imagecreatefrompng('images/smilybar.png');
 for($x=60; $x<$img_width-58; $x++) {
 imagecopy($img_frame,$img_f_smilybar,$x,43,0,0,1,56);
 }
 
 # smily - 26x26
-$img_f_smily = imagecreatefrompng('pics/smily'.$smily.'.png');
+$img_f_smily = imagecreatefrompng('images/smily'.$smily.'.png');
 imagecopy($img_frame,$img_f_smily,($img_width-26)/2,59,0,0,26,26);
 
 # left.png - 15x1
-$img_f_left = imagecreatefrompng('pics/left.png');
+$img_f_left = imagecreatefrompng('images/left.png');
 for($x=99; $x<$img_height-11;$x++) {
 imagecopy($img_frame,$img_f_left,0,$x,0,0,15,1);
 }
 
 # right.png - 15x1
-$img_f_right = imagecreatefrompng('pics/right.png');
+$img_f_right = imagecreatefrompng('images/right.png');
 for($x=99; $x<$img_height-11;$x++) {
 imagecopy($img_frame,$img_f_right,$img_width-11,$x,0,0,15,1);
 }
 
 # cornerL.png - 15x11
-$img_f_cornerL = imagecreatefrompng('pics/cornerL.png');
+$img_f_cornerL = imagecreatefrompng('images/cornerL.png');
 imagecopy($img_frame,$img_f_cornerL,0,$img_height-11,0,0,15,11);
 
 # cornerR.png - 11x11
-$img_f_cornerR = imagecreatefrompng('pics/cornerR.png');
+$img_f_cornerR = imagecreatefrompng('images/cornerR.png');
 imagecopy($img_frame,$img_f_cornerR,$img_width-11,$img_height-11,0,0,11,11);
 
 # bottom.png - 1x11
-$img_f_bottom = imagecreatefrompng('pics/bottom.png');
+$img_f_bottom = imagecreatefrompng('images/bottom.png');
 for($x=15; $x<$img_width-11; $x++) {
 imagecopy($img_frame,$img_f_bottom,$x,$img_height-11,0,0,1,11);
 }
 
 # mines(3) - 13x23 @ 20,60
 $str = sprintf("%03d",$mines);
-$img_f_mine1 = imagecreatefrompng('pics/big'.$str{0}.'.png');
-$img_f_mine2 = imagecreatefrompng('pics/big'.$str{1}.'.png');
-$img_f_mine3 = imagecreatefrompng('pics/big'.$str{2}.'.png');
+$img_f_mine1 = imagecreatefrompng('images/big'.$str{0}.'.png');
+$img_f_mine2 = imagecreatefrompng('images/big'.$str{1}.'.png');
+$img_f_mine3 = imagecreatefrompng('images/big'.$str{2}.'.png');
 imagecopy($img_frame,$img_f_mine1,20,60,0,0,13,23);
 imagecopy($img_frame,$img_f_mine2,33,60,0,0,13,23);
 imagecopy($img_frame,$img_f_mine3,46,60,0,0,13,23);
 
 # time(3) - 13x23 @ $img_width-57,60
 $str = sprintf("%03d",$time);
-$img_f_time1 = imagecreatefrompng('pics/big'.$str{0}.'.png');
-$img_f_time2 = imagecreatefrompng('pics/big'.$str{1}.'.png');
-$img_f_time3 = imagecreatefrompng('pics/big'.$str{2}.'.png');
+$img_f_time1 = imagecreatefrompng('images/big'.$str{0}.'.png');
+$img_f_time2 = imagecreatefrompng('images/big'.$str{1}.'.png');
+$img_f_time3 = imagecreatefrompng('images/big'.$str{2}.'.png');
 imagecopy($img_frame,$img_f_time1,$img_width-57,60,0,0,13,23);
 imagecopy($img_frame,$img_f_time2,($img_width-57)+13,60,0,0,13,23);
 imagecopy($img_frame,$img_f_time3,($img_width-57)+26,60,0,0,13,23);
@@ -337,7 +337,7 @@ for ($x=0; $x<count($grid); $x++) {
 if (is_numeric($grid[$x])) { $pic = $grid[$x]; }
  else { $pic = $brick[$grid[$x]]; }
 
-$img_sq = imagecreatefrompng('pics/'.$pic.'.png');
+$img_sq = imagecreatefrompng('images/'.$pic.'.png');
 imagecopy($img,$img_sq,$grid_x,$grid_y,0,0,16,16);
 
 $grid_x += 16;
