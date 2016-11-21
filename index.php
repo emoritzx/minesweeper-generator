@@ -16,7 +16,7 @@ if ($h > 30) {
 ?><!DOCTYPE html>
 <html>
     <head>
-        <title>Minesweeper Image Builder</title>
+        <title>Minesweeper Generator</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <script type="text/javascript">
 
@@ -25,23 +25,19 @@ if ($h > 30) {
             var vHeight = <?php echo $h; ?>;
 
         </script>
-        <script type="text/javascript" src="js/builder.js"></script>
+        <script data-main="js/main" src="js/require.js"></script>
     </head>
 
     <body>
 
-        <h1 id="head">Image Builder</h1>
-
-        <p id="links"><b>Links:</b>
-            [ <a href="../">Back to samples</a> ]
-        </p>
+        <h1>Image Builder</h1>
 
         <form name="info" action="viewer.php" method="GET" onsubmit="return false">
             <label>Field size:</label>(w x h)
             <input type="text" name="width"  maxlength="2" size="3" value="<?php echo $w; ?>" onchange="check2(this)" /> x
             <input type="text" name="height" maxlength="2" size="3" value="<?php echo $h; ?>" onchange="check2(this)" />
             <input type="button" value="Change" onclick="location.href = '?mode=resize&amp;w=' + this.form.width.value + '&amp;h=' + this.form.height.value + '&amp;frame=' + this.form.frame[0].checked" />
-            <input type="button" value="Reset" onclick="location.href = 'builder.php'" />
+            <input type="button" value="Reset" onclick="location.href = './'" />
             <label>Note:</label> This <em>will</em> erase the board.
 
             <table><tr>
@@ -64,14 +60,18 @@ if ($h > 30) {
             <input type="button" value="Clear field" onclick="fill('')" /><br />
             <label>Use frame?</label>
             [<input type="radio" name="frame" value="true" <?php
+            
 if (!isset($frame) || $frame == 'true') {
     echo 'checked';
 }
+
 ?> onclick="frameoff()"/> Yes
             <input type="radio" name="frame" value="false" <?php
+            
                    if ($frame == 'false') {
                        echo 'checked';
                    }
+                   
                    ?>/> No ]
             <label>Smily:</label>
             <input type="radio" name="smily" value="1" checked /><img src="images/smily1.png" alt="normal" align="middle" onclick="document.forms[0].elements[9].checked = true" onmouseover="this.style.cursor = 'pointer'" />
