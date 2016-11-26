@@ -9,6 +9,7 @@ define(function() {
         this._.height = ("height" in options) ? options.height : defaults.height;
         this.smily = ("smily" in options) ? options.smily : defaults.smily;
         this.fill = ("fill" in options) ? options.fill : defaults.fill;
+        this.frame = ("frame" in options) ? options.frame : defaults.frame;
         this._.grid = new Array(this.size);
         if (options instanceof Board && options.size === this.size) {
             for (var i = 0; i < options.private.grid.length; ++i) {
@@ -24,7 +25,8 @@ define(function() {
             width: 10,
             height: 10,
             smily: 0,
-            fill: 'N'
+            fill: 'N',
+            frame: true
         },
         writable: false
     });
@@ -69,6 +71,14 @@ define(function() {
             },
             set: function(value) {
                 this._.smily = value;
+            }
+        },
+        frame: {
+            get: function() {
+                return this._.frame;
+            },
+            set: function(value) {
+                this._.frame = (value) ? true : false;
             }
         }
     });
