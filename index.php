@@ -25,7 +25,7 @@ if ($h > 30) {
             var vHeight = <?php echo $h; ?>;
 
         </script>
-        <script data-main="js/main" src="js/require.js"></script>
+        <script data-main="js/main" src="lib/require.js"></script>
     </head>
 
     <body>
