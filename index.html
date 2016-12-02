@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Minesweeper Generator</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <script data-main="js/main" src="lib/require.js"></script>
+    </head>
+
+    <body>
+
+        <h1>Minesweeper Generator</h1>
+
+        <table>
+            <tr>
+                <th rowspan="3" valign="top">Key:</th>
+                <td>B = Bomb (normal)</td>
+                <td>C = Bomb (clicked)</td>
+                <td>W = Bomb (wrong)</td>
+            </tr>
+            <tr>
+                <td>N = Normal square</td>
+                <td>E = Empty square</td>
+                <td>M = Marked Mine</td>
+            </tr>
+            <tr>
+                <td>Q = Question Mark</td>
+                <td colspan="2">1-8 = Numbers</td>
+            </tr>
+        </table>
+
+            <label>Fill:</label>
+            <input type="button" value="Normal" onclick="fill('N')" />
+            <input type="button" value="Empty" onclick="fill('E')" />
+            <input type="button" value="Clear field" onclick="fill('')" /><br />
+            <label>Smily:</label>
+            <input type="radio" name="smily" value="1" checked /><img src="images/smily1.png" alt="normal" align="middle" onclick="document.forms[0].elements[9].checked = true" onmouseover="this.style.cursor = 'pointer'" />
+            <input type="radio" name="smily" value="2" /><img src="images/smily2.png" alt="ooh!" align="middle" onclick="document.forms[0].elements[10].checked = true" onmouseover="this.style.cursor = 'pointer'" />
+            <input type="radio" name="smily" value="3" /><img src="images/smily3.png" alt="ouch!" align="middle" onclick="document.forms[0].elements[11].checked = true" onmouseover="this.style.cursor = 'pointer'" />
+            <input type="radio" name="smily" value="4" /><img src="images/smily4.png" alt="yes!" align="middle" onclick="document.forms[0].elements[12].checked = true" onmouseover="this.style.cursor = 'pointer'" /><br />
+            <input type="button" value="Create Image" onclick="checkgrid()" />
+            <input type="hidden" name="mode" value="frame" />
+            <input type="hidden" name="graph" value="0" />
+
+    </body>
+</html>

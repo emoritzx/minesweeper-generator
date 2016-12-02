@@ -10,6 +10,8 @@ define(function() {
         this.smily = ("smily" in options) ? options.smily : defaults.smily;
         this.fill = ("fill" in options) ? options.fill : defaults.fill;
         this.frame = ("frame" in options) ? options.frame : defaults.frame;
+        this.mines = ("mines" in options) ? options.mines : defaults.mines;
+        this.time = ("time" in options) ? options.time : defaults.time;
         this._.grid = new Array(this.size);
         if (options instanceof Board && options.size === this.size) {
             for (var i = 0; i < options.private.grid.length; ++i) {
@@ -26,7 +28,9 @@ define(function() {
             height: 10,
             smily: 0,
             fill: 'N',
-            frame: true
+            frame: true,
+            mines: 10,
+            time: 0
         },
         writable: false
     });
@@ -41,7 +45,7 @@ define(function() {
                 return this._.width;
             },
             set: function(value) {
-                this.resize(value, this.height);
+                this.resize(parseInt(value), this.height);
             }
         },
         height: {
@@ -49,7 +53,7 @@ define(function() {
                 return this._.height;
             },
             set: function(value) {
-                this.resize(this.width, value);
+                this.resize(this.width, parseInt(value));
             }
         },
         size: {
@@ -79,6 +83,22 @@ define(function() {
             },
             set: function(value) {
                 this._.frame = (value) ? true : false;
+            }
+        },
+        mines: {
+            get: function() {
+                return this._.mines;
+            },
+            set: function(value) {
+                this._.mines = parseInt(value);
+            }
+        },
+        time: {
+            get: function() {
+                return this._.time;
+            },
+            set: function(value) {
+                this._.time = parseInt(value);
             }
         }
     });
