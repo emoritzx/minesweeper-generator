@@ -1,6 +1,6 @@
 define(
-    [],
-    function() {
+    ["board"],
+    function(Board) {
         "use strict";
         
         var Viewer = function(parent, board) {
@@ -16,12 +16,51 @@ define(
             var board = this._board;
             var container = document.createElement("DIV");
             this._container = container;
-            drawOptions(container, board);
+            drawOptions(this, container, board);
             drawGrid(container, board);
+            drawImage(container, board);
             this._parent.appendChild(this._container);
         };
         
-        function drawOptions(container, board) {
+        function drawOptions(view, container, board) {
+            container.appendChild((function() {
+                var div = document.createElement("DIV");
+                div.appendChild(document.createTextNode("Smily"));
+                var smilys = Board.smilys;
+                for (var i = 0; i < smilys.length; ++i) {
+                    var smily = smilys[i];
+                    var radio = document.createElement("INPUT");
+                    radio.type = "radio";
+                    radio.checked = smily === board.smily;
+                    radio.name = "smilys";
+                    div.appendChild(radio);
+                    var image = document.createElement("IMG");
+                    image.src = "images/smily-" + smily + ".png";
+                    image.alt = smily;
+                    image.title = smily;
+                    div.appendChild(image);
+                }
+                return div;
+            })());
+            container.appendChild((function() {
+                var div = document.createElement("DIV");
+                div.appendChild(document.createTextNode("Fill:"));
+                var normal = document.createElement("BUTTON");
+                normal.appendChild(document.createTextNode("Normal"));
+                normal.onclick = function() {
+                    board.fill('N');
+                    view.repaint();
+                };
+                div.appendChild(normal);
+                var empty = document.createElement("BUTTON");
+                empty.appendChild(document.createTextNode("Empty"));
+                empty.onclick = function() {
+                    board.fill('E');
+                    view.repaint();
+                };
+                div.appendChild(empty);
+                return div;
+            })());
             container.appendChild((function() {
                 var div = document.createElement("DIV");
                 div.appendChild(document.createTextNode("Use frame?"));
@@ -60,6 +99,17 @@ define(
                 }
             }
             container.appendChild(table);
+        }
+        
+        function drawImage(container, board) {
+            var image = document.createElement("IMG");
+            image.src = generateUrl(board);
+            image.alt = "Board";
+            container.appendChild(image);
+        }
+        
+        function generateUrl(board) {
+            return "generator.php?board=" + board.encode();
         }
         
         return Viewer;

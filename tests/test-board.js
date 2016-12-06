@@ -28,7 +28,7 @@ define(
                 {
                     height: 5,
                     width: 4,
-                    fill: 0
+                    data: 0
                 },
                 [
                     [0,0,0,0],
@@ -44,7 +44,7 @@ define(
                 {
                     height: 4,
                     width: 4,
-                    fill: 0
+                    data: 0
                 },
                 [
                     [0,0,0,0,1],
@@ -52,14 +52,14 @@ define(
                     [0,0,0,0,1],
                     [0,0,0,0,1]
                 ],
-                function(board) { board.fill = 1; board.width += 1; }
+                function(board) { board.data = 1; board.width += 1; }
             );
             runTest(
                 "Resize width +3",
                 {
                     height: 4,
                     width: 4,
-                    fill: 0
+                    data: 0
                 },
                 [
                     [0,0,0,0,1,1,1],
@@ -67,14 +67,14 @@ define(
                     [0,0,0,0,1,1,1],
                     [0,0,0,0,1,1,1]
                 ],
-                function(board) { board.fill = 1; board.width += 3; }
+                function(board) { board.data = 1; board.width += 3; }
             );
             runTest(
                 "Resize width -1",
                 {
                     height: 4,
                     width: 4,
-                    fill: 0
+                    data: 0
                 },
                 [
                     [0,0,0],
@@ -82,14 +82,14 @@ define(
                     [0,0,0],
                     [0,0,0]
                 ],
-                function(board) { board.fill = 1; board.width -= 1; }
+                function(board) { board.data = 1; board.width -= 1; }
             );
             runTest(
                 "Resize width -3",
                 {
                     height: 4,
                     width: 5,
-                    fill: 0
+                    data: 0
                 },
                 [
                     [0,0],
@@ -97,14 +97,14 @@ define(
                     [0,0],
                     [0,0]
                 ],
-                function(board) { board.fill = 1; board.width -= 3; }
+                function(board) { board.data = 1; board.width -= 3; }
             );
             runTest(
                 "Resize height +1",
                 {
                     height: 4,
                     width: 4,
-                    fill: 0
+                    data: 0
                 },
                 [
                     [0,0,0,0],
@@ -113,14 +113,14 @@ define(
                     [0,0,0,0],
                     [1,1,1,1]
                 ],
-                function(board) { board.fill = 1; board.height += 1; }
+                function(board) { board.data = 1; board.height += 1; }
             );
             runTest(
                 "Resize height +3",
                 {
                     height: 4,
                     width: 4,
-                    fill: 0
+                    data: 0
                 },
                 [
                     [0,0,0,0],
@@ -131,34 +131,49 @@ define(
                     [1,1,1,1],
                     [1,1,1,1]
                 ],
-                function(board) { board.fill = 1; board.height += 3; }
+                function(board) { board.data = 1; board.height += 3; }
             );
             runTest(
                 "Resize height -1",
                 {
                     height: 4,
                     width: 4,
-                    fill: 0
+                    data: 0
                 },
                 [
                     [0,0,0,0],
                     [0,0,0,0],
                     [0,0,0,0]
                 ],
-                function(board) { board.fill = 1; board.height -= 1; }
+                function(board) { board.data = 1; board.height -= 1; }
             );
             runTest(
                 "Resize height -3",
                 {
                     height: 5,
                     width: 4,
-                    fill: 0
+                    data: 0
                 },
                 [
                     [0,0,0,0],
                     [0,0,0,0]
                 ],
-                function(board) { board.fill = 1; board.height -= 3; }
+                function(board) { board.data = 1; board.height -= 3; }
+            );
+            runTest(
+                "Fill",
+                {
+                    height: 4,
+                    width: 4,
+                    data: 0
+                },
+                [
+                    [1,1,1,1],
+                    [1,1,1,1],
+                    [1,1,1,1],
+                    [1,1,1,1]
+                ],
+                function(board) { board.fill(1); }
             );
         }
 

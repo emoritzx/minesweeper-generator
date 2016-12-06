@@ -8,7 +8,7 @@ define(function() {
         this._.width = ("width" in options) ? options.width : defaults.width;
         this._.height = ("height" in options) ? options.height : defaults.height;
         this.smily = ("smily" in options) ? options.smily : defaults.smily;
-        this.fill = ("fill" in options) ? options.fill : defaults.fill;
+        this.data = ("data" in options) ? options.data : defaults.data;
         this.frame = ("frame" in options) ? options.frame : defaults.frame;
         this.mines = ("mines" in options) ? options.mines : defaults.mines;
         this.time = ("time" in options) ? options.time : defaults.time;
@@ -18,21 +18,27 @@ define(function() {
                 this._.grid[i] = options.private.grid[i];
             }
         } else {
-            this._.grid.fill(this.fill);
+            this.fill(this.data);
         }
     };
     
-    Object.defineProperty(Board, "defaults", {
-        value: {
-            width: 10,
-            height: 10,
-            smily: 0,
-            fill: 'N',
-            frame: true,
-            mines: 10,
-            time: 0
+    Object.defineProperties(Board, {
+        defaults: {
+            value: {
+                width: 10,
+                height: 10,
+                smily: "normal",
+                data: 'N',
+                frame: true,
+                mines: 10,
+                time: 0
+            },
+            writable: false
         },
-        writable: false
+        smilys: {
+            value: ["normal", "click", "lose", "win"],
+            writable: false
+        }
     });
     
     Object.defineProperties(Board.prototype, {
@@ -61,12 +67,12 @@ define(function() {
                 return this.height * this.width;
             }
         },
-        fill: {
+        data: {
             get: function() {
-                return this._.fill;
+                return this._.data;
             },
             set: function(value) {
-                this._.fill = value;
+                this._.data = value;
             }
         },
         smily: {
@@ -125,7 +131,7 @@ define(function() {
     Board.prototype.resize = function(width, height) {
         if (width > this.width) {
             var delta = width - this.width;
-            var data = Array(delta).fill(this.fill);
+            var data = Array(delta).fill(this.data);
             for (var x = this.width; x < this._.grid.length + 1; x += width) {
                 Array.prototype.splice.apply(this._.grid, [x, 0].concat(data));
             }
@@ -138,13 +144,17 @@ define(function() {
         this._.width = width;
         if (height > this.height) {
             var delta = height - this.height;
-            var data = Array(this.width * delta).fill(this.fill);
+            var data = Array(this.width * delta).fill(this.data);
             Array.prototype.splice.apply(this._.grid, [this._.grid.length, 0].concat(data));
         } else if (height < this.height) {
             var delta = this.height - height;
             this._.grid.splice(this.size - this.width * delta, this.width * delta);
         }
         this._.height = height;
+    };
+    
+    Board.prototype.fill = function(value) {
+        this._.grid.fill(value);
     };
     
     Board.prototype.toString = function() {
@@ -155,6 +165,18 @@ define(function() {
                 + ']\n';
         }
         return output;
+    };
+    
+    Board.prototype.encode = function() {
+        return btoa(JSON.stringify({
+            width: this.width,
+            height: this.height,
+            frame: this.frame,
+            smily: this.smily,
+            time: this.time,
+            mines: this.mines,
+            grid: this._.grid
+        }));
     };
     
     return Board;

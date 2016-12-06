@@ -1,15 +1,11 @@
 <?php
 
-parse_str($_SERVER['QUERY_STRING']);
+$data = json_decode(base64_decode($_GET['data']), true);
 
-$img_width = $width * 16;
-$img_height = $height * 16;
+$img_width = $data['width'] * 16;
+$img_height = $data['height'] * 16;
 
-for ($x = 0; $x < strlen($graph); $x++) {
-    $grid[$x] = $graph{$x};
-}
-
-if ($frame == 'true') {
+if ($frame === TRUE) {
     $img_width += 26;
     $img_height += 110;
     $grid_x = 15;
@@ -20,11 +16,11 @@ if ($frame == 'true') {
 }
 
 $img = @imagecreate($img_width, $img_height)
-        or die("Cannot Initialize new GD image stream");
+    or die('Cannot Initialize new GD image stream');
 $bg1 = imagecolorallocate($img, 0, 0, 0);
 $txt = imagecolorallocate($img, 255, 0, 0);
 
-if ($frame == 'true') {
+if ($data['frame'] == 'true') {
 
     $img_frame = imagecreate($img_width, $img_height);
     $bg2 = imagecolorallocate($img_frame, 0, 0, 0);
@@ -88,7 +84,7 @@ if ($frame == 'true') {
     }
 
 # mines(3) - 13x23 @ 20,60
-    $str = sprintf("%03d", $mines);
+    $str = sprintf("%03d", $data['mines']);
     $img_f_mine1 = imagecreatefrompng('images/big' . $str{0} . '.png');
     $img_f_mine2 = imagecreatefrompng('images/big' . $str{1} . '.png');
     $img_f_mine3 = imagecreatefrompng('images/big' . $str{2} . '.png');
@@ -97,7 +93,7 @@ if ($frame == 'true') {
     imagecopy($img_frame, $img_f_mine3, 46, 60, 0, 0, 13, 23);
 
 # time(3) - 13x23 @ $img_width-57,60
-    $str = sprintf("%03d", $time);
+    $str = sprintf("%03d", $data['time']);
     $img_f_time1 = imagecreatefrompng('images/big' . $str{0} . '.png');
     $img_f_time2 = imagecreatefrompng('images/big' . $str{1} . '.png');
     $img_f_time3 = imagecreatefrompng('images/big' . $str{2} . '.png');
@@ -114,12 +110,12 @@ $brick = array('B' => 'mine1', 'C' => 'mine2', 'W' => 'mine3', 'N' => 'normal', 
 $orig_x = $grid_x;
 $orig_y = $grid_y;
 
-for ($x = 0; $x < count($grid); $x++) {
+for ($x = 0; $x < count($data['grid']); $x++) {
 
     if (is_numeric($grid[$x])) {
-        $pic = $grid[$x];
+        $pic = $data['grid'][$x];
     } else {
-        $pic = $brick[$grid[$x]];
+        $pic = $brick[$data['grid'][$x]];
     }
 
     $img_sq = imagecreatefrompng('images/' . $pic . '.png');
@@ -127,7 +123,7 @@ for ($x = 0; $x < count($grid); $x++) {
 
     $grid_x += 16;
 
-    if (($grid_x - $orig_x) / 16 == $width) {
+    if (($grid_x - $orig_x) / 16 == $data['width']) {
         $grid_x = $orig_x;
         $grid_y += 16;
     }
