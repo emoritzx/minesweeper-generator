@@ -88,6 +88,18 @@ define(
                 div.appendChild(document.createTextNode(board.time));
                 return div;
             })());
+            container.appendChild((function() {
+                var div = document.createElement("DIV");
+                div.appendChild(document.createTextNode("Width:"));
+                div.appendChild(document.createTextNode(board.width));
+                return div;
+            })());
+            container.appendChild((function() {
+                var div = document.createElement("DIV");
+                div.appendChild(document.createTextNode("Height:"));
+                div.appendChild(document.createTextNode(board.height));
+                return div;
+            })());
         }
         
         function drawGrid(container, board) {
