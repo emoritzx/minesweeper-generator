@@ -73,6 +73,10 @@ define(
                 var checkbox = document.createElement("INPUT");
                 checkbox.type = "checkbox";
                 checkbox.checked = board.frame;
+                checkbox.onclick = function() {
+                    board.frame = checkbox.checked;
+                    view.repaint();
+                };
                 div.appendChild(checkbox);
                 return div;
             })());
