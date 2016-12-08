@@ -54,7 +54,7 @@ if ($data['frame'] == 'true') {
     }
 
 # smily - 26x26
-    $img_f_smily = imagecreatefrompng('images/smily-' . $smily . '.png');
+    $img_f_smily = imagecreatefrompng('images/smily-' . $data['smily'] . '.png');
     imagecopy($img_frame, $img_f_smily, ($img_width - 26) / 2, 59, 0, 0, 26, 26);
 
 # left.png - 15x1
