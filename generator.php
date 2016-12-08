@@ -54,7 +54,7 @@ if ($data['frame'] == 'true') {
     }
 
 # smily - 26x26
-    $img_f_smily = imagecreatefrompng('images/smily' . $smily . '.png');
+    $img_f_smily = imagecreatefrompng('images/smily-' . $smily . '.png');
     imagecopy($img_frame, $img_f_smily, ($img_width - 26) / 2, 59, 0, 0, 26, 26);
 
 # left.png - 15x1
@@ -112,7 +112,7 @@ $orig_y = $grid_y;
 
 for ($x = 0; $x < count($data['grid']); $x++) {
 
-    if (is_numeric($grid[$x])) {
+    if (is_numeric($data['grid'][$x])) {
         $pic = $data['grid'][$x];
     } else {
         $pic = $brick[$data['grid'][$x]];
