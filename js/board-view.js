@@ -26,20 +26,26 @@ define(
             container.appendChild((function() {
                 var div = document.createElement("DIV");
                 div.appendChild(document.createTextNode("Smily"));
-                var smilys = Board.smilys;
-                for (var i = 0; i < smilys.length; ++i) {
-                    var smily = smilys[i];
+                Board.smilys.forEach(function(smily) {
                     var radio = document.createElement("INPUT");
                     radio.type = "radio";
                     radio.checked = smily === board.smily;
                     radio.name = "smilys";
+                    radio.onclick = function() {
+                        board.smily = smily;
+                        view.repaint();
+                    };
                     div.appendChild(radio);
                     var image = document.createElement("IMG");
                     image.src = "images/smily-" + smily + ".png";
                     image.alt = smily;
                     image.title = smily;
+                    image.onclick = function() {
+                        radio.click();
+                    };
+                    image.setAttribute("smily", "");
                     div.appendChild(image);
-                }
+                });
                 return div;
             })());
             container.appendChild((function() {
