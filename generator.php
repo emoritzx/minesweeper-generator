@@ -1,11 +1,11 @@
 <?php
 
-$data = json_decode(base64_decode($_GET['data']), true);
+$data = json_decode(base64_decode($_GET['board']), true);
 
 $img_width = $data['width'] * 16;
 $img_height = $data['height'] * 16;
 
-if ($frame === TRUE) {
+if ($data['frame'] === TRUE) {
     $img_width += 26;
     $img_height += 110;
     $grid_x = 15;
@@ -134,7 +134,7 @@ imagepng($img);
 imagedestroy($img);
 imagedestroy($img_sq);
 
-if ($frame == 'true') {
+if ($data['frame'] == 'true') {
     imagedestroy($img_frame);
     imagedestroy($img_f_title);
     imagedestroy($img_f_close);
