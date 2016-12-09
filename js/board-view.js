@@ -25,7 +25,9 @@ define(
         function drawOptions(view, container, board) {
             container.appendChild((function() {
                 var div = document.createElement("DIV");
-                div.appendChild(document.createTextNode("Smily"));
+                var label = document.createElement("LABEL");
+                label.appendChild(document.createTextNode("Smily:"));
+                div.appendChild(label);
                 Board.smilys.forEach(function(smily) {
                     var radio = document.createElement("INPUT");
                     radio.type = "radio";
@@ -50,7 +52,9 @@ define(
             })());
             container.appendChild((function() {
                 var div = document.createElement("DIV");
-                div.appendChild(document.createTextNode("Fill:"));
+                var label = document.createElement("LABEL");
+                label.appendChild(document.createTextNode("Fill:"));
+                div.appendChild(label);
                 var normal = document.createElement("BUTTON");
                 normal.appendChild(document.createTextNode("Normal"));
                 normal.onclick = function() {
@@ -69,7 +73,9 @@ define(
             })());
             container.appendChild((function() {
                 var div = document.createElement("DIV");
-                div.appendChild(document.createTextNode("Use frame?"));
+                var label = document.createElement("LABEL");
+                label.appendChild(document.createTextNode("Use frame?"));
+                div.appendChild(label);
                 var checkbox = document.createElement("INPUT");
                 checkbox.type = "checkbox";
                 checkbox.checked = board.frame;
@@ -80,30 +86,35 @@ define(
                 div.appendChild(checkbox);
                 return div;
             })());
-            container.appendChild((function() {
-                var div = document.createElement("DIV");
-                div.appendChild(document.createTextNode("Mines:"));
-                div.appendChild(document.createTextNode(board.mines));
-                return div;
-            })());
-            container.appendChild((function() {
-                var div = document.createElement("DIV");
-                div.appendChild(document.createTextNode("Time:"));
-                div.appendChild(document.createTextNode(board.time));
-                return div;
-            })());
-            container.appendChild((function() {
-                var div = document.createElement("DIV");
-                div.appendChild(document.createTextNode("Width:"));
-                div.appendChild(document.createTextNode(board.width));
-                return div;
-            })());
-            container.appendChild((function() {
-                var div = document.createElement("DIV");
-                div.appendChild(document.createTextNode("Height:"));
-                div.appendChild(document.createTextNode(board.height));
-                return div;
-            })());
+            drawNumberEditor(container, view, "mines", board, 0, 999);
+            drawNumberEditor(container, view, "time", board, 0, 999);
+            drawNumberEditor(container, view, "width", board, 9, 20);
+            drawNumberEditor(container, view, "height", board, 9, 20);
+        }
+        
+        function drawNumberEditor(container, view, name, board, min, max) {
+            var div = document.createElement("DIV");
+            div.className = "number-editor";
+            var label = document.createElement("LABEL");
+            label.appendChild(document.createTextNode(name[0].toUpperCase() + name.slice(1) + ':'));
+            div.appendChild(label);
+            var textbox = document.createElement("INPUT");
+            textbox.type = "number";
+            textbox.value = board[name];
+            textbox.max = max;
+            textbox.min = min;
+            textbox.onchange = function() {
+                if (this.value >= min && this.value <= max) {
+                    board[name] = this.value;
+                } else if (this.value < min) {
+                    this.value = min;
+                } else if (this.value > max) {
+                    this.value = max;
+                }
+                view.repaint();
+            };
+            div.appendChild(textbox);
+            container.appendChild(div);
         }
         
         function drawGrid(container, board) {
