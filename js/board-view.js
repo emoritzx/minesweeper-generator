@@ -4,25 +4,22 @@ define(
         "use strict";
         
         var Viewer = function(parent, board) {
-            this._board = board;
-            this._parent = parent;
-            this.repaint();
-        };
-        
-        Viewer.prototype.repaint = function() {
-            if (typeof this._container !== "undefined") {
-                this._parent.removeChild(this._container);
-            }
-            var board = this._board;
+            var painters = [];
             var container = document.createElement("DIV");
-            this._container = container;
-            drawOptions(this, container, board);
-            drawGrid(container, board);
-            drawImage(container, board);
-            this._parent.appendChild(this._container);
+            parent.appendChild(container);
+            drawOptions(painters, container, board);
+            drawGrid(painters, container, board);
+            drawImage(painters, container, board);
+            repaint(painters);
         };
         
-        function drawOptions(view, container, board) {
+        function repaint(painters) {
+            painters.forEach(function(painter) {
+                painter();
+            });
+        };
+        
+        function drawOptions(painters, container, board) {
             container.appendChild((function() {
                 var div = document.createElement("DIV");
                 var label = document.createElement("LABEL");
@@ -35,7 +32,7 @@ define(
                     radio.name = "smilys";
                     radio.onclick = function() {
                         board.smily = smily;
-                        view.repaint();
+                        repaint(painters);
                     };
                     div.appendChild(radio);
                     var image = document.createElement("IMG");
@@ -59,14 +56,14 @@ define(
                 normal.appendChild(document.createTextNode("Normal"));
                 normal.onclick = function() {
                     board.fill('N');
-                    view.repaint();
+                    repaint(painters);
                 };
                 div.appendChild(normal);
                 var empty = document.createElement("BUTTON");
                 empty.appendChild(document.createTextNode("Empty"));
                 empty.onclick = function() {
                     board.fill('E');
-                    view.repaint();
+                    repaint(painters);
                 };
                 div.appendChild(empty);
                 return div;
@@ -81,18 +78,18 @@ define(
                 checkbox.checked = board.frame;
                 checkbox.onclick = function() {
                     board.frame = checkbox.checked;
-                    view.repaint();
+                    repaint(painters);
                 };
                 div.appendChild(checkbox);
                 return div;
             })());
-            drawNumberEditor(container, view, "mines", board, 0, 999);
-            drawNumberEditor(container, view, "time", board, 0, 999);
-            drawNumberEditor(container, view, "width", board, 9, 20);
-            drawNumberEditor(container, view, "height", board, 9, 20);
+            drawNumberEditor(container, painters, "mines", board, 0, 999);
+            drawNumberEditor(container, painters, "time", board, 0, 999);
+            drawNumberEditor(container, painters, "width", board, 9, 20);
+            drawNumberEditor(container, painters, "height", board, 9, 20);
         }
         
-        function drawNumberEditor(container, view, name, board, min, max) {
+        function drawNumberEditor(container, painters, name, board, min, max) {
             var div = document.createElement("DIV");
             div.className = "number-editor";
             var label = document.createElement("LABEL");
@@ -111,16 +108,26 @@ define(
                 } else if (this.value > max) {
                     this.value = max;
                 }
-                view.repaint();
+                repaint(painters);
             };
             div.appendChild(textbox);
             container.appendChild(div);
         }
         
-        function drawGrid(container, board) {
+        function drawGrid(painters, container, board) {
             var table = document.createElement("TABLE");
-            var tbody = document.createElement("TBODY");
+            var tbody = drawGridBase(board);
             table.appendChild(tbody);
+            container.appendChild(table);
+            painters.push(function() {
+                table.removeChild(tbody);
+                tbody = drawGridBase(board);
+                table.appendChild(tbody);
+            });
+        }
+        
+        function drawGridBase(board) {
+            var tbody = document.createElement("TBODY");
             for (var y = 0; y < board.height; ++y) {
                 var tr = document.createElement("TR");
                 tbody.appendChild(tr);
@@ -131,14 +138,17 @@ define(
                     td.appendChild(entry);
                 }
             }
-            container.appendChild(table);
+            return tbody;
         }
         
-        function drawImage(container, board) {
+        function drawImage(painters, container, board) {
             var image = document.createElement("IMG");
             image.src = generateUrl(board);
             image.alt = "Board";
             container.appendChild(image);
+            painters.push(function() {
+                image.src = generateUrl(board);
+            });
         }
         
         function generateUrl(board) {
