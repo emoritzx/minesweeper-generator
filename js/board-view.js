@@ -3,6 +3,9 @@ define(
     function(Board) {
         "use strict";
         
+        var WIDTH_MAX = 99;
+        var HEIGHT_MAX = 99;
+        
         var Viewer = function(parent, board) {
             var painters = [];
             var container = document.createElement("DIV");
@@ -85,8 +88,8 @@ define(
             })());
             drawNumberEditor(container, painters, "mines", board, 0, 999);
             drawNumberEditor(container, painters, "time", board, 0, 999);
-            drawNumberEditor(container, painters, "width", board, 9, 20);
-            drawNumberEditor(container, painters, "height", board, 9, 20);
+            drawNumberEditor(container, painters, "width", board, 9, WIDTH_MAX);
+            drawNumberEditor(container, painters, "height", board, 9, HEIGHT_MAX);
         }
         
         function drawNumberEditor(container, painters, name, board, min, max) {
