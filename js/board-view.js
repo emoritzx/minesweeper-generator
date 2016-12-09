@@ -59,6 +59,7 @@ define(
                 normal.appendChild(document.createTextNode("Normal"));
                 normal.onclick = function() {
                     board.fill('N');
+                    board.data = 'N';
                     repaint(painters);
                 };
                 div.appendChild(normal);
@@ -66,6 +67,7 @@ define(
                 empty.appendChild(document.createTextNode("Empty"));
                 empty.onclick = function() {
                     board.fill('E');
+                    board.data = 'E';
                     repaint(painters);
                 };
                 div.appendChild(empty);
