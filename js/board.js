@@ -38,7 +38,26 @@ define(function() {
         smilys: {
             value: ["normal", "click", "lose", "win"],
             writable: false
+        },
+        EMPTY: {
+            value: 'E',
+            writable: false
+        },
+        NORMAL: {
+            value: 'N',
+            writable: false
+        },
+        valid: {
+            value: {},
+            writable: false
         }
+    });
+    
+    ['B', 'C', 'W', 'N', 'E', 'M', 'Q', '1', '2', '3', '4', '5', '6', '7', '8'].forEach(function(entry) {
+        Object.defineProperty(Board.valid, entry, {
+            value: true,
+            writable: false
+        });
     });
     
     Object.defineProperties(Board.prototype, {

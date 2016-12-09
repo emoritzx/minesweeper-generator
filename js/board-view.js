@@ -58,16 +58,16 @@ define(
                 var normal = document.createElement("BUTTON");
                 normal.appendChild(document.createTextNode("Normal"));
                 normal.onclick = function() {
-                    board.fill('N');
-                    board.data = 'N';
+                    board.fill(Board.NORMAL);
+                    board.data = Board.NORMAL;
                     repaint(painters);
                 };
                 div.appendChild(normal);
                 var empty = document.createElement("BUTTON");
                 empty.appendChild(document.createTextNode("Empty"));
                 empty.onclick = function() {
-                    board.fill('E');
-                    board.data = 'E';
+                    board.fill(Board.EMPTY);
+                    board.data = Board.EMPTY;
                     repaint(painters);
                 };
                 div.appendChild(empty);

@@ -22,7 +22,7 @@ define(
             });
         }
         
-        function test() {
+        function dataTests() {
             runTest(
                 "Constructor",
                 {
@@ -176,7 +176,42 @@ define(
                 function(board) { board.fill(1); }
             );
         }
+        
+        function testValidity(value, valid) {
+            QUnit.test("Value Test - " + value, function(assert) {
+                assert[valid](Board.valid[value], valid);
+            });
+        }
+        
+        function validityTests() {
+            [
+                ['A', 'notOk'],
+                ['B', 'ok'],
+                ['C', 'ok'],
+                [Board.EMPTY, 'ok'],
+                [Board.NORMAL, 'ok'],
+                ['W', 'ok'],
+                ['N', 'ok'],
+                ['E', 'ok'],
+                ['M', 'ok'],
+                ['Q', 'ok'],
+                ['0', 'notOk'],
+                ['1', 'ok'],
+                ['2', 'ok'],
+                ['3', 'ok'],
+                ['4', 'ok'],
+                ['5', 'ok'],
+                ['6', 'ok'],
+                ['7', 'ok'],
+                ['8', 'ok'],
+                ['9', 'notOk'],
+                ['?', 'notOk'],
+                ['!', 'notOk']
+            ].forEach(function(pair) { 
+                testValidity(pair[0], pair[1]);
+            });
+        }
 
-        return new TestGroup(test);
+        return new TestGroup(dataTests, validityTests);
     }
 );
