@@ -103,8 +103,11 @@ define(
             var textbox = document.createElement("INPUT");
             textbox.type = "number";
             textbox.value = board[name];
-            textbox.max = max;
-            textbox.min = min;
+            textbox.max = "" + max;
+            textbox.min = "" + min;
+            textbox.onfocus = function() {
+                this.select();
+            };
             textbox.onchange = function() {
                 if (this.value >= min && this.value <= max) {
                     board[name] = this.value;
@@ -121,17 +124,17 @@ define(
         
         function drawGrid(painters, container, board) {
             var table = document.createElement("TABLE");
-            var tbody = drawGridBase(board);
+            var tbody = drawGridBase(painters, board);
             table.appendChild(tbody);
             container.appendChild(table);
             painters.push(function() {
                 table.removeChild(tbody);
-                tbody = drawGridBase(board);
+                tbody = drawGridBase(painters, board);
                 table.appendChild(tbody);
             });
         }
         
-        function drawGridBase(board) {
+        function drawGridBase(painters, board) {
             var tbody = document.createElement("TBODY");
             for (var y = 0; y < board.height; ++y) {
                 var tr = document.createElement("TR");
@@ -139,11 +142,31 @@ define(
                 for (var x = 0; x < board.width; ++x) {
                     var td = document.createElement("TD");
                     tr.appendChild(td);
-                    var entry = document.createTextNode(board.getCell(x, y));
+                    var entry = drawGridEditor(painters, x, y, board);
                     td.appendChild(entry);
                 }
             }
             return tbody;
+        }
+        
+        function drawGridEditor(painters, x, y, board) {
+            var input = document.createElement("INPUT");
+            input.type = "textbox";
+            input.maxlength = "1";
+            input.minlength = "1";
+            input.value = board.getCell(x, y);
+            input.style.width = "1em";
+            input.onfocus = function() {
+                this.select();
+            };
+            input.onchange = function() {
+                if (Board.valid[this.value] !== true) {
+                    this.value = Board.EMPTY;
+                }
+                board.setCell(x, y, this.value);
+                repaint(painters);
+            };
+            return input;
         }
         
         function drawImage(painters, container, board) {
