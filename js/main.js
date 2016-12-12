@@ -1,3 +1,10 @@
+/**
+ * Application main
+ * 
+ * Copyright (c) 2016, Evan Moritz.
+ * Licensed under the MIT license. See accompanying LICENSE file for terms.
+ */
+
 require(
     ["board-view", "board"],
     function(BoardViewer, Board) {

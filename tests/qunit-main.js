@@ -1,3 +1,10 @@
+/**
+ * Unit test main
+ * 
+ * Copyright (c) 2016, Evan Moritz.
+ * Licensed under the MIT license. See accompanying LICENSE file for terms.
+ */
+
 "use strict";
 require.config({
     paths: {

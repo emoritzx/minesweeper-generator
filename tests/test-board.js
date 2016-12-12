@@ -1,3 +1,10 @@
+/**
+ * Board unit tests
+ * 
+ * Copyright (c) 2016, Evan Moritz.
+ * Licensed under the MIT license. See accompanying LICENSE file for terms.
+ */
+
 define(
     ['TestGroup', 'js/board'],
     function (TestGroup, Board) {

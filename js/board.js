@@ -1,3 +1,9 @@
+/**
+ * Board data structure
+ * 
+ * Copyright (c) 2016, Evan Moritz.
+ * Licensed under the MIT license. See accompanying LICENSE file for terms.
+ */
 define(function() {
 
     "use strict";

@@ -1,3 +1,9 @@
+/**
+ * Board viewer UI generator
+ * 
+ * Copyright (c) 2016, Evan Moritz.
+ * Licensed under the MIT license. See accompanying LICENSE file for terms.
+ */
 define(
     ["board"],
     function(Board) {

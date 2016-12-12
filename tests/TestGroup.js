@@ -1,3 +1,10 @@
+/**
+ * Test group
+ * 
+ * Copyright (c) 2016, Evan Moritz.
+ * Licensed under the MIT license. See accompanying LICENSE file for terms.
+ */
+
 define(function() {
     return function() {
         var tests = arguments;
