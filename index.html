@@ -3,8 +3,10 @@
     <head>
         <title>Minesweeper Generator</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script data-main="js/main" src="lib/require.js"></script>
-        <link rel="stylesheet" href="css/board-view.css" type="text/css">
+        <link rel="stylesheet" href="css/board-view.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="css/board-view-mobile.css" type="text/css" media="screen and (max-device-width: 480px)">
     </head>
 
     <body>
@@ -19,17 +21,23 @@
             </ul>
         </nav>
 
-        <label>Key:</label>
-        <ul>
-            <li>B = Bomb (normal)</li>
-            <li>C = Bomb (clicked)</li>
-            <li>W = Bomb (wrong)</li>
-            <li>N = Normal square</li>
-            <li>E = Empty square</li>
-            <li>M = Marked Mine</li>
-            <li>Q = Question Mark</li>
-            <li>1-8 = Numbers</li>
-        </ul>
+        <div id="legend">
+            <label>Key:</label>
+            <ul>
+                <li>B = Bomb (normal)</li>
+                <li>C = Bomb (clicked)</li>
+                <li>W = Bomb (wrong)</li>
+                <li>N = Normal square</li>
+                <li>E = Empty square</li>
+                <li>M = Marked Mine</li>
+                <li>Q = Question Mark</li>
+                <li>1-8 = Numbers</li>
+            </ul>
+        </div>
+        
+        <div id="form"></div>
+        <div id="grid"></div>
+        <div id="output"></div>
         
         <footer>
             Copyright &copy; 2012-2016, Evan Moritz. <br>

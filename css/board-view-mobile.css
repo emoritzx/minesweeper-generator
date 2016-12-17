@@ -1,0 +1,28 @@
+/**
+ * Board editor styles
+ *
+ * Copyright (c) 2016, Evan Moritz.
+ * Licensed under the MIT license. See accompanying LICENSE file for terms.
+ */
+
+body {
+    text-align: center;
+}
+
+#legend,
+#form,
+#grid,
+#output {
+    width: 100vw;
+    margin: 1em 0;
+    text-align: left;
+}
+
+#grid,
+#output {
+    text-align: center;
+}
+
+#grid > * {
+    display: inline-block;
+}

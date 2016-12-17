@@ -5,6 +5,11 @@
  * Licensed under the MIT license. See accompanying LICENSE file for terms.
  */
 
+h1 {
+    border-bottom: 1px dotted black;
+    padding-bottom: 0.25em;
+}
+
 img[smily]:hover {
     cursor: pointer;
 }
@@ -17,4 +22,31 @@ label {
 
 .number-editor > input {
     width: 3em;
+}
+
+nav > ul {
+    list-style: none;
+    padding-left: 1em;
+}
+
+nav > ul > li {
+    display: inline-block;
+}
+
+nav > ul > li:before {
+    content: ">";
+    margin: 0.25em;
+}
+
+#legend,
+#form,
+#grid,
+#output {
+    float: left;
+    margin: 1em;
+}
+
+footer {
+    clear: both;
+    padding: 1em;
 }

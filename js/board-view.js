@@ -12,13 +12,11 @@ define(
         var WIDTH_MAX = 99;
         var HEIGHT_MAX = 99;
         
-        var Viewer = function(parent, board) {
+        var Viewer = function(form, grid, output, board) {
             var painters = [];
-            var container = document.createElement("DIV");
-            parent.appendChild(container);
-            drawOptions(painters, container, board);
-            drawGrid(painters, container, board);
-            drawImage(painters, container, board);
+            drawOptions(painters, form, board);
+            drawGrid(painters, grid, board);
+            drawImage(painters, output, board);
             repaint(painters);
         };
         

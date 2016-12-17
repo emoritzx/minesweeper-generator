@@ -9,7 +9,11 @@ require(
     ["board-view", "board"],
     function(BoardViewer, Board) {
         var init = function() {
-            new BoardViewer(document.body, new Board());
+            new BoardViewer(
+                document.getElementById("form"),
+                document.getElementById("grid"),
+                document.getElementById("output"),
+                new Board());
         };
         if (document.readyState === "complete") {
             init();
