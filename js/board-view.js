@@ -113,13 +113,12 @@ define(
                 this.select();
             };
             textbox.onchange = function() {
-                if (this.value >= min && this.value <= max) {
-                    board[name] = this.value;
-                } else if (this.value < min) {
+                if (this.value < min) {
                     this.value = min;
                 } else if (this.value > max) {
                     this.value = max;
                 }
+                board[name] = this.value;
                 repaint(painters);
             };
             div.appendChild(textbox);
