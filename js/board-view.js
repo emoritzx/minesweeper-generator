@@ -9,8 +9,8 @@ define(
     function(Board) {
         "use strict";
         
-        var WIDTH_MAX = 99;
-        var HEIGHT_MAX = 99;
+        var WIDTH_MAX = 30;
+        var HEIGHT_MAX = 24;
         
         var Viewer = function(form, grid, output, board) {
             var painters = [];
