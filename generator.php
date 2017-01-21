@@ -1,6 +1,6 @@
 <?php
 
-# Copyright (c) 2012-2016, Evan Moritz.
+# Copyright (c) 2012-2017, Evan Moritz.
 # Licensed under the MIT License. See the accompanying LICENSE file for terms.
 
 $data = json_decode(base64_decode($_GET['board']), true);

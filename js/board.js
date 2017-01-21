@@ -1,7 +1,7 @@
 /**
  * Board data structure
  * 
- * Copyright (c) 2016, Evan Moritz.
+ * Copyright (c) 2016-2017, Evan Moritz.
  * Licensed under the MIT license. See accompanying LICENSE file for terms.
  */
 define(function() {
